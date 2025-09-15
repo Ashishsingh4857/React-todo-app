@@ -32,6 +32,20 @@ function App() {
 		);
 	};
 
+	useEffect(() => {
+		//,on initial render
+		const todos = JSON.parse(localStorage.getItem("todos"));
+
+		if (todos && todos.length > 0) {
+			setTodos(todos);
+		}
+	}, []);
+
+	useEffect(() => {
+		// Save todos to localStorage whenever they change
+		localStorage.setItem("todos", JSON.stringify(todos));
+	}, [todos]);
+
 	return (
 		<TodoProvider
 			value={{
